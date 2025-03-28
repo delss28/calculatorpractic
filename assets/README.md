@@ -25,5 +25,5 @@
 
 1. Клонируйте репозиторий:
    ```bash
-   git clone <URL_репозитория>
+   git clone https://github.com/delss28/calculatorpractic.git
    cd calculator_app
