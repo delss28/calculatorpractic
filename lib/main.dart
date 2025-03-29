@@ -28,20 +28,20 @@ class CalculatorScreen extends StatefulWidget {
 
 class _CalculatorScreenState extends State<CalculatorScreen> {
   String _output = "0";
-  bool _isNewExpression = true; // Флаг для отслеживания нового выражения
+  bool _isNewExpression = true; 
 
   void _onButtonPressed(String buttonText) {
     setState(() {
       if (buttonText == "AC") {
         _output = "0";
-        _isNewExpression = true; // Сбрасываем флаг
+        _isNewExpression = true;  
       } else if (buttonText == "=") {
         _calculateResult();
-        _isNewExpression = true; // После вычисления выражения устанавливаем флаг
+        _isNewExpression = true;
       } else if (buttonText == "abs") {
         double num = double.parse(_output);
         _output = (num.abs()).toString();
-        _isNewExpression = false; // Не сбрасываем флаг
+        _isNewExpression = false;
       } else if (buttonText == "ln") {
         double num = double.parse(_output);
         if (num > 0) {
@@ -49,12 +49,11 @@ class _CalculatorScreenState extends State<CalculatorScreen> {
         } else {
           _output = "Ошибка";
         }
-        _isNewExpression = false; // Не сбрасываем флаг
+        _isNewExpression = false;
       } else {
-        // Если это новое выражение, сбрасываем _output
         if (_isNewExpression) {
           _output = buttonText;
-          _isNewExpression = false; // Устанавливаем флаг, что выражение введено
+          _isNewExpression = false;
         } else {
           if (_output == "0" && buttonText != ".") {
             _output = buttonText;
@@ -68,7 +67,6 @@ class _CalculatorScreenState extends State<CalculatorScreen> {
 
   void _calculateResult() {
     try {
-      // Проверка на наличие точки в конце выражения
       if (_output.endsWith('.')) {
         setState(() {
           _output = "Ошибка";
@@ -76,7 +74,6 @@ class _CalculatorScreenState extends State<CalculatorScreen> {
         return;
       }
 
-      // Проверка на наличие нескольких точек в числе
       RegExp decimalRegExp = RegExp(
         r'(\d+)\.\s*[\+\-\*\/]\s*(\d+)|(\d+)\.\d*\.\d*',
       );
@@ -87,7 +84,6 @@ class _CalculatorScreenState extends State<CalculatorScreen> {
         return;
       }
 
-      // Проверка на наличие некорректных операций
       RegExp regExp = RegExp(r'(\d+)\s*-\s*[\+\-\*\/]\s*(\d+)');
       if (regExp.hasMatch(_output)) {
         setState(() {
@@ -103,7 +99,7 @@ class _CalculatorScreenState extends State<CalculatorScreen> {
       double eval = exp.evaluate(EvaluationType.REAL, cm);
       setState(() {
         _output = eval.toString();
-        _isNewExpression = true; // Устанавливаем флаг, что новое выражение
+        _isNewExpression = true; 
       });
     } catch (e) {
       setState(() {
